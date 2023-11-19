@@ -1,0 +1,2 @@
+kafka_python==2.0.2
+pyspark==3.5.0
