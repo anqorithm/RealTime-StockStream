@@ -1,5 +1,5 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, from_json
+from pyspark.sql.functions import col, from_json, avg
 from pyspark.sql.types import StructType, StructField, StringType, DecimalType, IntegerType, DateType, TimestampType
 import sys
 
@@ -13,6 +13,37 @@ def writeToCassandra(df, epochId):
             .save()
     except Exception as e:
         print("Error writing to Cassandra:", e)
+
+
+def writeToCassandraGrouped(df, epochId):
+    try:
+        df.write \
+            .format("org.apache.spark.sql.cassandra") \
+            .options(table="grouped_stocks", keyspace="stockdata") \
+            .mode("append") \
+            .save()
+    except Exception as e:
+        print("Error writing grouped data to Cassandra:", e)
+
+
+def pivotAndWriteToCassandra(batch_df, epochId):
+    trade_types = ['buy', 'sell']
+
+    pivoted_df = batch_df.groupBy("stock").pivot(
+        "trade_type", trade_types).avg("price")
+
+    for trade_type in trade_types:
+        column_name = f"avg_price_{trade_type}"
+        pivoted_df = pivoted_df.withColumnRenamed(trade_type, column_name)
+
+    try:
+        pivoted_df.write \
+            .format("org.apache.spark.sql.cassandra") \
+            .options(table="pivoted_stocks", keyspace="stockdata") \
+            .mode("append") \
+            .save()
+    except Exception as e:
+        print("Error writing pivoted data to Cassandra:", e)
 
 
 def main():
@@ -59,8 +90,31 @@ def main():
         .foreachBatch(writeToCassandra) \
         .start()
 
+    df_parsed = df.selectExpr("CAST(value AS STRING)") \
+                  .select(from_json(col("value"), schema).alias("data")) \
+                  .select("data.*")
+
+    df_grouped = df_parsed.groupBy("trade_type").agg(
+        avg("price").alias("avg_price"))
+
+    query_cassandra_grouped = df_grouped.writeStream \
+        .outputMode("complete") \
+        .foreachBatch(writeToCassandraGrouped) \
+        .start()
+
+    df_parsed = df.selectExpr("CAST(value AS STRING)") \
+                  .select(from_json(col("value"), schema).alias("data")) \
+                  .select("data.*")
+
+    query_pivot = df_parsed.writeStream \
+        .outputMode("append") \
+        .foreachBatch(pivotAndWriteToCassandra) \
+        .start()
+
     query_console.awaitTermination()
     query_cassandra.awaitTermination()
+    query_cassandra_grouped.awaitTermination()
+    query_pivot.awaitTermination()
 
 
 if __name__ == "__main__":
