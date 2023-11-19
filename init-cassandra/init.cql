@@ -34,7 +34,6 @@ CREATE TABLE stockdata.ranked_stocks (
     PRIMARY KEY ((trade_type), rank)
 );
 
-
 CREATE TABLE stockdata.analytics_stocks (
     stock text,
     trade_id text,

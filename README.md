@@ -48,6 +48,20 @@ Follow these steps to set up your development environment:
    kafka-topics.sh --create --topic stocks --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1
    ```
 
+
+## Suppored Data Opreations
+
+1. **Grouping Aggregation:** Summarize data by groups.
+2. **Pivot Aggregation:** Reshape data, converting rows to columns.
+3. **Rollups and Cubes:** Perform hierarchical and combinational aggregations.
+4. **Ranking Functions:** Assign ranks within data partitions.
+5. **Analytic Functions:** Compute aggregates while maintaining row-level details.
+
+
+## Database Schema
+
+![stockdata-schema](./assets/stockdata-schema.png)
+
 #### Configuring Cassandra
 
 1. **Create a Keyspace and Table**:
