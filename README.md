@@ -149,8 +149,6 @@ Install the necessary Python packages:
 Check the logs for each service in their respective directories for monitoring and debugging.
 
 
-
-
 ## Testing
 
 ![docker-compose-d](./assets/docker-compose-d.png)
