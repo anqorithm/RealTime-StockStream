@@ -171,6 +171,25 @@ Install the necessary Python packages:
 Check the logs for each service in their respective directories for monitoring and debugging.
 
 
+## Visualizations
+
+To run the dashbaord, you need to run the following command:
+
+```bash
+$ cd plotly & python3 dashboard.py
+```
+
+![graph 1](./assets/graph1.png)
+
+
+![graph 2](./assets/graph2.png)
+
+
+![graph 3](./assets/graph3.png)
+
+
+![graph 4](./assets/graph4.png)
+
 ## Testing
 
 ![docker-compose-d](./assets/docker-compose-d.png)
