@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.4.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.3.0...v1.4.0) (2023-11-19)
+
+
+### Features
+
+* add aggregation with grouping & pivoting ([bdebad4](https://github.com/qahta0/RealTime-StockStream/commit/bdebad4d6ed41d3ff80b7d514d8d89efce3c1410))
+* add aggregation with rollups & cubes, ranking & analytic functions ([9614e7c](https://github.com/qahta0/RealTime-StockStream/commit/9614e7cfdfee3a5a474d02e2e1ba8b86ecfafe03))
+* add more stock symobls ([428ba58](https://github.com/qahta0/RealTime-StockStream/commit/428ba5824e46c22617b41c4be071402adf574205))
+
 ## [1.3.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.2.0...v1.3.0) (2023-11-19)
 
 
