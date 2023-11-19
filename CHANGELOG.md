@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.1.0...v1.2.0) (2023-11-19)
+
+
+### Features
+
+* automate the pipleline initializatgions ([4d16cc1](https://github.com/qahta0/RealTime-StockStream/commit/4d16cc123dd5a49603914a59e75d55306b441ef5))
+
 ## [1.1.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.0.0...v1.1.0) (2023-11-19)
 
 
