@@ -6,6 +6,9 @@ from datetime import datetime
 from kafka import KafkaProducer
 import time
 
+stocks = ["AAPL", "MSFT", "GOOGL", "AMZN", "FB", "TSLA", "BRK.A", "V", "JPM",
+          "JNJ", "UNH", "WMT", "PG", "MA", "DIS", "NVDA", "HD", "PYPL", "BAC", "CMCSA"]
+
 
 def is_kafka_running(server):
     try:
@@ -44,7 +47,7 @@ def main():
 
     while True:
         data = {
-            "stock": "AAPL",
+            "stock": random.choice(stocks),
             "trade_id": str(uuid.uuid4()),
             "price": round(random.uniform(100, 200), 2),
             "quantity": random.randint(1, 100),
