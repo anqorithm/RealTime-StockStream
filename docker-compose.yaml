@@ -28,6 +28,10 @@ services:
     networks:
       stock-net:
         ipv4_address: 172.28.1.2
+    volumes:
+      - ./scripts/init-kafka.sh:/init-kafka.sh
+    # entrypoint: ["/bin/bash", "init-kafka.sh"]
+    restart: always
 
   cassandra:
     image: cassandra:latest
@@ -35,16 +39,20 @@ services:
       - "9042:9042"
     volumes:
       - ./init-cassandra:/init-cassandra
+      - ./scripts/init-cassandra-schema.sh:/init-cassandra-schema.sh
     environment:
       - CASSANDRA_START_RPC=true
     networks:
       stock-net:
         ipv4_address: 172.28.1.3
+    # entrypoint: ["/bin/bash", "init-cassandra-schema.sh"]
+    restart: always
 
   spark:
     image: bitnami/spark:latest
     volumes:
       - ./spark:/opt/bitnami/spark/jobs
+      - ./scripts/submit-spark-job.sh:/opt/bitnami/spark/submit-spark-job.sh
     ports:
       - "8080:8080"
     depends_on:
@@ -52,17 +60,19 @@ services:
     networks:
       stock-net:
         ipv4_address: 172.28.1.4
-    
+    entrypoint: ["sh", "-c", "./submit-spark-job.sh"]
+    restart: always
+
   kafka_producer:
     build:
-      context: ./kafka-producer 
-      dockerfile: kafka_producer.dockerfile 
+      context: ./kafka-producer
+      dockerfile: kafka_producer.dockerfile
     depends_on:
       - kafka
     networks:
       stock-net:
-        ipv4_address: 172.28.1.5
-
+        ipv4_address: 172.28.1.8
+    restart: always
 networks:
   stock-net:
     driver: bridge
