@@ -189,7 +189,7 @@ Check the logs for each service in their respective directories for monitoring a
 
 ## Contributing
 
-Contributions to RealTime StockStream are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the submission process.
+Contributions to RealTime StockStream are welcome.
 
 ## Authors
 
