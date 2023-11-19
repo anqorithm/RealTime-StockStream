@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.2.0...v1.3.0) (2023-11-19)
+
+
+### Features
+
+* add plotly RealTime StockStream dashbaord ([ac2c66e](https://github.com/qahta0/RealTime-StockStream/commit/ac2c66e15e7230827dace8516ed5dc1018367c68))
+
 ## [1.2.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.1.0...v1.2.0) (2023-11-19)
 
 
