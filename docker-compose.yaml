@@ -52,6 +52,16 @@ services:
     networks:
       stock-net:
         ipv4_address: 172.28.1.4
+    
+  kafka_producer:
+    build:
+      context: ./kafka-producer 
+      dockerfile: kafka_producer.dockerfile 
+    depends_on:
+      - kafka
+    networks:
+      stock-net:
+        ipv4_address: 172.28.1.5
 
 networks:
   stock-net:
