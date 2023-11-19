@@ -15,7 +15,16 @@ Ensure you have the following software installed:
 - Docker
 - Python (version 3.11 or higher)
 
-### Installation
+
+### Todo Features
+
+1. **Live Market Data Integration** ⌛
+2. **Advanced Analytics Features** ⌛
+3. **Interactive Data Visualization** ⌛
+4. **Improved Scalability** ⌛
+5. **User Customization Options** ⌛
+6. **Stronger Security** ⌛
+
 
 ### Used Techs
 
@@ -26,6 +35,9 @@ Ensure you have the following software installed:
 - Appache ZooKeeper
 - Appache Spark
 - Python
+
+
+### Installation
 
 Follow these steps to set up your development environment:
 
@@ -163,24 +175,17 @@ Check the logs for each service in their respective directories for monitoring a
 
 ![docker-compose-d](./assets/docker-compose-d.png)
 
-
 ![docker-monitoring](./assets/docker-monitoring.png)
-
 
 ![docker-ps](./assets/docker-ps.png)
 
-
 ![cqlsh](./assets/cqlsh.png)
-
 
 ![stocks-data-before](./assets/stocks-data-before.png)
 
-
 ![creat-kafka-topic](./assets/create-kafka-topic.png)
 
-
 ![kafka-producer](./assets/kafka-producer.png)
-
 
 ![spark-processing-1](./assets/spark-processing-1.png)
 
