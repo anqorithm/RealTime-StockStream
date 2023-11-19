@@ -3,7 +3,7 @@
 RealTime StockStream is a streamlined system for processing live stock market data. It uses Apache Kafka for data input, Apache Spark for data handling, and Apache Cassandra for data storage, making it a powerful yet easy-to-use tool for financial data analysis
 
 
-![real-time-stock-stream.gif](./assets/background.jpg)
+![real-time-stock-stream](./assets/background.jpg)
 
 ## Getting Started
 
@@ -16,6 +16,16 @@ Ensure you have the following software installed:
 - Python (version 3.11 or higher)
 
 ### Installation
+
+### Used Techs
+
+![used techs](./assets/usedTechs.jpg)
+
+- Appache Kafka
+- Appache Cassandra
+- Appache ZooKeeper
+- Appache Spark
+- Python
 
 Follow these steps to set up your development environment:
 
