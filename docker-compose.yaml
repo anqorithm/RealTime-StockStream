@@ -60,7 +60,7 @@ services:
     networks:
       stock-net:
         ipv4_address: 172.28.1.4
-    entrypoint: ["sh", "-c", "./submit-spark-job.sh"]
+    # entrypoint: ["sh", "-c", "./submit-spark-job.sh"]
     restart: always
 
   kafka_producer:
@@ -73,6 +73,22 @@ services:
       stock-net:
         ipv4_address: 172.28.1.8
     restart: always
+
+  plotly:
+    build:
+      context: ./plotly
+      dockerfile: plotly.dockerfile
+    volumes:
+      - ./plotly/dashboard.py:/dashboard.py
+    ports:
+      - "8050:8050"
+    depends_on:
+      - cassandra
+    networks:
+        stock-net:
+          ipv4_address: 172.28.1.9
+    restart: always
+
 networks:
   stock-net:
     driver: bridge
