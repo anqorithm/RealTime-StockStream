@@ -182,8 +182,9 @@ Check the logs for each service in their respective directories for monitoring a
 ![kafka-producer](./assets/kafka-producer.png)
 
 
-![spark-processing](./assets/spark-processing.png)
+![spark-processing-1](./assets/spark-processing-1.png)
 
+![spark-processing-1](./assets/spark-processing-2.png)
 
 ![cassandra](./assets/cassandra-data.png)
 
