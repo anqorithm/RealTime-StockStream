@@ -21,3 +21,28 @@ CREATE TABLE stockdata.pivoted_stocks (
     avg_price_buy decimal,
     avg_price_sell decimal
 );
+
+CREATE TABLE stockdata.ranked_stocks (
+    stock text,
+    trade_id text,
+    price double,
+    quantity int,
+    trade_date date,
+    trade_time time,
+    trade_type text,
+    rank int,
+    PRIMARY KEY ((trade_type), rank)
+);
+
+
+CREATE TABLE stockdata.analytics_stocks (
+    stock text,
+    trade_id text,
+    price double,
+    quantity int,
+    trade_date date,
+    trade_time time,
+    trade_type text,
+    avg_price_overall double,
+    PRIMARY KEY ((trade_type), trade_date)
+);
