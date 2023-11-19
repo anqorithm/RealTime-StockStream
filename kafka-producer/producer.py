@@ -23,8 +23,9 @@ def create_producer():
         producer = KafkaProducer(
             bootstrap_servers=['localhost:9092'],
             value_serializer=lambda v: json.dumps(v).encode('utf-8'),
-            retries=5,  # Retry configuration
-            retry_backoff_ms=2000  # Wait time between retries
+            retries=5,
+            retry_backoff_ms=2000,
+            request_timeout_ms=60000
         )
         return producer
     except KafkaError as e:
@@ -53,7 +54,7 @@ def produce_data(producer):
             print(f"Timeout error while sending data: {e}")
         except KafkaError as e:
             print(f"Failed to send data: {e}")
-        time.sleep(1)  # Adjust sleep time as needed
+        time.sleep(1)
 
 
 if __name__ == "__main__":
