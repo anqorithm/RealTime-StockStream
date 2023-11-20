@@ -92,63 +92,102 @@ Follow these steps to set up your development environment:
    Use Docker Compose to start Kafka, Zookeeper, Cassandra, and Spark services:
    ```yaml
     version: '3.9'
-        services:
-        zookeeper:
-            image: bitnami/zookeeper:latest
-            ports:
-            - "2181:2181"
-            environment:
-            - ALLOW_ANONYMOUS_LOGIN=yes
-            networks:
-            stock-net:
-                ipv4_address: 172.28.1.1
-                
-        kafka:
-            image: bitnami/kafka:latest
-            ports:
-            - "9092:9092"
-            environment:
-            - KAFKA_BROKER_ID=1
-            - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
-            - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.28.1.2:9092
-            - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
-            - ALLOW_PLAINTEXT_LISTENER=yes
-            depends_on:
-            - zookeeper
-            networks:
-            stock-net:
-                ipv4_address: 172.28.1.2
 
-        cassandra:
-            image: cassandra:latest
-            ports:
-            - "9042:9042"
-            volumes:
-            - ./init-cassandra:/init-cassandra
-            environment:
-            - CASSANDRA_START_RPC=true
-            networks:
-            stock-net:
-                ipv4_address: 172.28.1.3
+    name: "realtime-stock-market"
 
-        spark:
-            image: bitnami/spark:latest
-            volumes:
-            - ./spark:/opt/bitnami/spark/jobs
-            ports:
-            - "8080:8080"
-            depends_on:
-            - kafka
-            networks:
-            stock-net:
-                ipv4_address: 172.28.1.4
-
+    services:
+    zookeeper:
+        image: bitnami/zookeeper:latest
+        ports:
+        - "2181:2181"
+        environment:
+        - ALLOW_ANONYMOUS_LOGIN=yes
         networks:
         stock-net:
-            driver: bridge
-            ipam:
-            config:
-                - subnet: 172.28.0.0/16
+            ipv4_address: 172.28.1.1
+            
+    kafka:
+        image: bitnami/kafka:latest
+        ports:
+        - "9092:9092"
+        environment:
+        - KAFKA_BROKER_ID=1
+        - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+        - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://172.28.1.2:9092
+        - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+        - ALLOW_PLAINTEXT_LISTENER=yes
+        depends_on:
+        - zookeeper
+        networks:
+        stock-net:
+            ipv4_address: 172.28.1.2
+        volumes:
+        - ./scripts/init-kafka.sh:/init-kafka.sh
+        # entrypoint: ["/bin/bash", "init-kafka.sh"]
+        restart: always
+
+    cassandra:
+        image: cassandra:latest
+        ports:
+        - "9042:9042"
+        volumes:
+        - ./init-cassandra:/init-cassandra
+        - ./scripts/init-cassandra-schema.sh:/init-cassandra-schema.sh
+        environment:
+        - CASSANDRA_START_RPC=true
+        networks:
+        stock-net:
+            ipv4_address: 172.28.1.3
+        # entrypoint: ["/bin/bash", "init-cassandra-schema.sh"]
+        restart: always
+
+    spark:
+        image: bitnami/spark:latest
+        volumes:
+        - ./spark:/opt/bitnami/spark/jobs
+        - ./scripts/submit-spark-job.sh:/opt/bitnami/spark/submit-spark-job.sh
+        ports:
+        - "8080:8080"
+        depends_on:
+        - kafka
+        networks:
+        stock-net:
+            ipv4_address: 172.28.1.4
+        # entrypoint: ["sh", "-c", "./submit-spark-job.sh"]
+        restart: always
+
+    kafka_producer:
+        build:
+        context: ./kafka-producer
+        dockerfile: kafka_producer.dockerfile
+        depends_on:
+        - kafka
+        networks:
+        stock-net:
+            ipv4_address: 172.28.1.8
+        restart: always
+
+    plotly:
+        build:
+        context: ./plotly
+        dockerfile: plotly.dockerfile
+        volumes:
+        - ./plotly/dashboard.py:/dashboard.py
+        ports:
+        - "8050:8050"
+        depends_on:
+        - cassandra
+        networks:
+            stock-net:
+            ipv4_address: 172.28.1.9
+        restart: always
+
+    networks:
+    stock-net:
+        driver: bridge
+        ipam:
+        config:
+            - subnet: 172.28.0.0/16
    ```
 
 2. **Run Docker Compose**:
