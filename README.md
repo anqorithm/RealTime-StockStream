@@ -195,19 +195,6 @@ Follow these steps to set up your development environment:
    docker-compose up -d
    ```
 
-### Dependencies
-
-Install the necessary Python packages:
-
-- Kafka Python client:
-  ```bash
-  pip install kafka-python==2.0.2
-  ```
-- PySpark:
-  ```bash
-  pip install pyspark==3.5.0
-  ```
-
 ### Usage
 
 1. **Run the Spark Job**:
