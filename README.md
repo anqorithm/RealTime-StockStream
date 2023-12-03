@@ -281,6 +281,8 @@ Contributions to RealTime StockStream are welcome, just open a PR 😊.
 ## Authors
 
 - [Abdullah 🚀](https://github.com/qahta0)
+- [Abdullah 🚀](https://github.com/AbdullahAlzeid)
+- [Yaarob 🚀](https://github.com/yaarob988)
 
 ## License
 
