@@ -252,6 +252,28 @@ $ cd plotly & python3 dashboard.py
 
 ![cassandra](./assets/cassandra-data.png)
 
+
+## Tables Results
+
+### Stocks Table
+![stocks](./assets/stocks.png)
+
+### Analysis Stocks Table
+![analytics_stocks](./assets/analytics_stocks.png)
+
+### Analysis Stocks Table
+![grouped_stocks](./assets/grouped_stocks.png)
+
+### Pivoted Stocks Table
+![grouped_stocks](./assets/pivoted_stocks.png)
+
+### Ranked Stocks Table
+![grouped_stocks](./assets/ranked_stocks.png)
+
+### Rollup Stocks Table
+![grouped_stocks](./assets/rollup_stocks.png)
+
+
 ## Contributing
 
 Contributions to RealTime StockStream are welcome, just open a PR 😊.
