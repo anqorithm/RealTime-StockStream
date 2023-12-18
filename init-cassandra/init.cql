@@ -45,3 +45,11 @@ CREATE TABLE stockdata.analytics_stocks (
     avg_price_overall double,
     PRIMARY KEY ((trade_type), trade_date)
 );
+
+CREATE TABLE stockdata.rollup_stocks (
+    trade_date text,
+    trade_type text,
+    avg_price double,
+    PRIMARY KEY (trade_date, trade_type)
+);
+
