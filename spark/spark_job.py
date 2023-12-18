@@ -162,12 +162,18 @@ def main():
         .foreachBatch(analyticsAndWriteToCassandra) \
         .start()
 
+    query_pivot = df_parsed.writeStream \
+        .outputMode("append") \
+        .foreachBatch(pivotAndWriteToCassandra) \
+        .start()
+
     query_console.awaitTermination()
     query_cassandra.awaitTermination()
     query_rollup.awaitTermination()
     query_rank.awaitTermination()
     query_analytics.awaitTermination()
     query_cassandra_grouped.awaitTermination()
+    query_pivot.awaitTermination()
 
 
 if __name__ == "__main__":
