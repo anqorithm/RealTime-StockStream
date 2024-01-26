@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.5.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.4.0...v1.5.0) (2023-12-18)
+
+
+### Features
+
+* add query for pivoting table ([56b065e](https://github.com/qahta0/RealTime-StockStream/commit/56b065e6384b0a065c6a341287ed44a8c1afa488))
+* update init.cql schema ([616a12e](https://github.com/qahta0/RealTime-StockStream/commit/616a12e71147bf8bb5c69ea8a47293485dbc15ea))
+* update plotly dashboard ([27245c2](https://github.com/qahta0/RealTime-StockStream/commit/27245c2d9e8012651e9ac37529ec937098eda2ad))
+
 ## [1.4.0](https://github.com/qahta0/RealTime-StockStream/compare/v1.3.0...v1.4.0) (2023-11-19)
 
 
